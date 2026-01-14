@@ -1,20 +1,20 @@
 import { Routes, Route } from "react-router-dom";
-import Dashboard from "../pages/Dashboard/Dashboard"
 import Enterprise from "../pages/Enterprise/Enterprise"
 import LeadProfile from "../pages/LeadProfile/LeadProfile"
 import LeadRegistration from "../pages/LeadRegistration/LeadRegistration"
 import PropertyRegistration from "../pages/PropertyRegistration/PropertyRegistration"
+import App from "../App";
 
 
 
 export default function AppRoutes(){
     return(
         <Routes>
-            <Route path="/" element={<Dashboard/>}/>
-             <Route path="/" element={<Enterprise/>}/>
-              <Route path="/" element={<LeadProfile/>}/>
-               <Route path="/" element={<LeadRegistration/>}/>
-                <Route path="/" element={<PropertyRegistration/>}/>
+            <Route path="/" element={<App/>}/>
+             <Route path="/Enterprise" element={<Enterprise/>}/>
+              <Route path="/LeadProfile" element={<LeadProfile/>}/>
+               <Route path="/LeadRegistration" element={<LeadRegistration/>}/>
+                <Route path="/PropertyRegistration" element={<PropertyRegistration/>}/>
         </Routes>
     )
 }
