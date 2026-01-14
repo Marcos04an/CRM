@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+
 import Dashboard from "../pages/Dashboard/Dashboard"
 import Enterprise from "../pages/Enterprise/Enterprise"
 import LeadProfile from "../pages/LeadProfile/LeadProfile"
@@ -10,6 +11,7 @@ import PropertyRegistration from "../pages/PropertyRegistration/PropertyRegistra
 export default function AppRoutes(){
     return(
         <Routes>
+            
             <Route path="/" element={<Dashboard/>}/>
              <Route path="/" element={<Enterprise/>}/>
               <Route path="/" element={<LeadProfile/>}/>
