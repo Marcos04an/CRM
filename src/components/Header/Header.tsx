@@ -1,14 +1,22 @@
 import { Link } from "react-router-dom";
+import anylai from "../../assets/anylai.jpg";
+import "./Header.css";
 
- export default function Header(){
-    return(
-        <header>
-            <h1>AnyLAI</h1>
-            <nav>
-                <Link to="/">Início</Link>
-                <Link to="/imoveis">Meus Imóveis</Link>
-                <Link to="/construtora">Construtora Y</Link>
-            </nav>
-        </header>
-    )
- }
+export default function Header() {
+  return (
+    <header className="header">
+      <Link to="/" className="logo-container">
+        <img src={anylai} alt="AnyLAI" className="anylai-img" />
+        <span className="anylai-texto">
+          AnyL<span className="ai-green">AI</span>
+        </span>
+      </Link>
+
+      <nav className="nav">
+        <Link to="/">Início</Link>
+        <Link to="/imoveis">Meus Imóveis</Link>
+        <Link to="/construtora">Construtora Y</Link>
+      </nav>
+    </header>
+  );
+}

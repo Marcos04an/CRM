@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.navbar {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 240px;
+  height: calc(100vh - 64px);
+  background-color: #ffffff;
+  border-right: 1px solid #eaeaea;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-header {
+  margin-bottom: 32px; 
+}
+
+.navbar-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #e8f5ed; 
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+
+.navbar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; 
+}
+
+.navbar-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #444;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar-menu a:hover {
+  background-color: #f7f7f7;
+}
+
+.navbar-menu a.active {
+  background-color: #f0f0f0;
+  font-weight: 600;
+  color: #000;
+}
+
+.navbar-menu .icon {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+}
+
+
+.logout-item {
+  margin-top: 16px; 
+  color: #666 !important;
+}
