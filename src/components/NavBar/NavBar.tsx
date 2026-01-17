@@ -1,42 +1,58 @@
 import { useState } from "react";
-
+import "./NavBar.css";
+// Se estiver usando Lucide-React ou similar, importe os ícones. 
+// Aqui usarei emojis para facilitar, mas você pode substituir por componentes de ícone.
 
 type NavItem =
-| "Dasboard"
-| "Empreendimentos"
-| "Profissionais"
-| "Unidades"
-| "Atendimentos"
-| "Configurações";
+  | "Dashboard"
+  | "Empreendimentos"
+  | "Profissionais"
+  | "Unidades"
+  | "Atendimentos"
+  | "Configurações"
+  | "Sair";
 
-export default function NavBar(){
-    const[activeItem, setActiveItem] = useState<NavItem>("Dasboard");
+export default function NavBar() {
+  const [activeItem, setActiveItem] = useState<NavItem>("Dashboard");
 
-    return(
-        <aside className="navbar">
-            <div className="navbar-header">
-                <span className="navbar-tittle">CRM AnyLAI</span>
-            </div>
+  const menuItems = [
+    { name: "Dashboard", icon: "📈" },
+    { name: "Empreendimentos", icon: "🏢" },
+    { name: "Profissionais", icon: "👥" },
+    { name: "Unidades", icon: "🏠" },
+    { name: "Atendimentos", icon: "🎧" },
+    { name: "Configurações", icon: "⚙️" },
+  ];
 
-            <nav className="navbar-menu">
-                {[
-                    "Dashboard",
-                    "Empreendimentos",
-                    "Profissionais",
-                    "Unidades",
-                    "Atendimentos",
-                    "Configurações",
+  return (
+    <aside className="navbar">
+      <div className="navbar-header">
+        <div className="navbar-title">
+          <span className="anylai-texto">
+         CRM AnyL<span className="ai-green">AI</span>
+        </span>
+      
+        </div>
+      </div>
 
-                ].map((item)=>(
-                    <a key={item}
-                    className={activeItem === item ? "active" : ""}
-                    onClick={() => setActiveItem(item as NavItem)}>
-                        {item}
-                    </a>
-                ))}
-
-            </nav>
-
-        </aside>
-    )
+      <nav className="navbar-menu">
+        {menuItems.map((item) => (
+          <a
+            key={item.name}
+            className={activeItem === item.name ? "active" : ""}
+            onClick={() => setActiveItem(item.name as NavItem)}
+          >
+            <span className="icon">{item.icon}</span>
+            {item.name}
+          </a>
+        ))}
+        
+        {/* Item Sair separado ou ao final da lista */}
+        <a className="logout-item" onClick={() => console.log("Sair")}>
+          <span className="icon">↪️</span>
+          Sair
+        </a>
+      </nav>
+    </aside>
+  );
 }
