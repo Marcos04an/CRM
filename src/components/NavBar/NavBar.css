@@ -10,21 +10,20 @@
   border-right: 1px solid #eaeaea;
   display: flex;
   flex-direction: column;
-  padding: 24px 16px; /* Espaçamento interno */
+  padding: 24px 16px;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
 }
 
 .navbar-header {
-  margin-bottom: 32px; /* Espaço entre o título e o primeiro item */
+  margin-bottom: 32px; 
 }
 
 .navbar-title {
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: #e8f5ed; /* Fundo verde claro da imagem */
-  color: #1a1a1a;
+  background-color: #e8f5ed; 
   padding: 10px 14px;
   border-radius: 8px;
   font-weight: 600;
@@ -36,7 +35,7 @@
 .navbar-menu {
   display: flex;
   flex-direction: column;
-  gap: 8px; /* Espaço entre cada link */
+  gap: 8px; 
 }
 
 .navbar-menu a {
@@ -70,8 +69,8 @@
   width: 20px;
 }
 
-/* Estilo específico para o botão Sair no final */
+
 .logout-item {
-  margin-top: 16px; /* Dá um respiro dos itens de cima */
+  margin-top: 16px; 
   color: #666 !important;
 }

@@ -12,14 +12,14 @@
 
   padding: 0 32px;
 
-  /* RESPEITA NAVBAR + HEADER */
+ 
   margin-left: 240px;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 
 }
 
-/* ESQUERDA */
+
 .footer-left img {
   height: 32px;
   width: 32px;
@@ -27,7 +27,7 @@
   object-fit: cover;
 }
 
-/* CENTRO */
+
 .footer-center {
   display: flex;
   gap: 24px;

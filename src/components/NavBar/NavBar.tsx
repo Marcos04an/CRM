@@ -1,7 +1,5 @@
 import { useState } from "react";
 import "./NavBar.css";
-// Se estiver usando Lucide-React ou similar, importe os ícones. 
-// Aqui usarei emojis para facilitar, mas você pode substituir por componentes de ícone.
 
 type NavItem =
   | "Dashboard"
@@ -47,7 +45,7 @@ export default function NavBar() {
           </a>
         ))}
         
-        {/* Item Sair separado ou ao final da lista */}
+       
         <a className="logout-item" onClick={() => console.log("Sair")}>
           <span className="icon">↪️</span>
           Sair
