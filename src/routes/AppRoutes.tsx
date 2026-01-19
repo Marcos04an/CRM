@@ -16,7 +16,7 @@ export default function AppRoutes(){
              <Route path="/" element={<Enterprise/>}/>
               <Route path="/" element={<LeadProfile/>}/>
                <Route path="/" element={<LeadRegistration/>}/>
-                <Route path="/" element={<PropertyRegistration/>}/>
+                <Route path="/PropertyRegistration" element={<PropertyRegistration/>}/>
         </Routes>
     )
 }
