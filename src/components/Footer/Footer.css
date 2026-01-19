@@ -3,30 +3,28 @@
 
 .footer {
   height: 64px;
-  background-color: #fff;
-  border-top: 2px solid #000;
-
+  background-color: #000;
+  font-family: 'Poppins', sans-serif;
+  
+  
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 0 32px;
-
- 
-  margin-left: 240px;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-
+  z-index: 100; 
 }
-
 
 .footer-left img {
   height: 32px;
   width: 32px;
   border-radius: 50%;
-  object-fit: cover;
 }
-
 
 .footer-center {
   display: flex;
@@ -35,15 +33,12 @@
 
 .footer-center a {
   font-size: 14px;
+  color: #fff;
   text-decoration: none;
-  color: #000;
-}
-
-.footer-center a:hover {
-  opacity: 0.7;
 }
 
 .footer-right p {
   font-size: 12px;
-  color: #333;
+  color: #fff;
+  margin: 0;
 }

@@ -11,8 +11,8 @@ export default function App(){
     <div>
       <Header/>
       <NavBar/>
+       <AppRoutes/>
       <main className="main-content"></main>
-      <AppRoutes/>
       <Footer/>
     </div>
   )
