@@ -1,140 +1,156 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
+// Importando um ícone de "check" para o popup (pode precisar instalar: npm i react-icons)
+import { FiCheckCircle } from 'react-icons/fi'; 
 import './ClientRegistration.css';
 
-// Interface para definir os tipos dos dados do formulário
+// Interface atualizada com os campos do Figma
 interface ClientFormData {
   fullName: string;
   email: string;
   phone: string;
-  document: string; // CPF ou CNPJ
-  address: string;
-  city: string;
-  type: 'individual' | 'company';
+  interest: string; // Novo campo
+  priceRange: string; // Novo campo
+  origin: string; // Novo campo
 }
 
 const ClientRegistration = () => {
-  // Estado inicial do formulário
   const [formData, setFormData] = useState<ClientFormData>({
     fullName: '',
     email: '',
     phone: '',
-    document: '',
-    address: '',
-    city: '',
-    type: 'individual'
+    interest: '',
+    priceRange: '',
+    origin: ''
   });
 
-  // Função para lidar com mudanças nos inputs
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    // A correção do 'as HTMLInputElement' é necessária aqui
+  // Estado para controlar a exibição do popup de sucesso
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target as HTMLInputElement;
-    
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
 
-  // Função de envio do formulário
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // Aqui você faria a chamada para sua API
-    console.log('Dados do Cliente para envio:', formData);
-    alert('Cliente cadastrado com sucesso! (Verifique o console)');
+    console.log('Dados para envio:', formData);
+    
+    // Mostra o popup de sucesso
+    setShowSuccessPopup(true);
+
+    // Esconde o popup e limpa o formulário após 3 segundos
+    setTimeout(() => {
+      setShowSuccessPopup(false);
+      setFormData({
+        fullName: '', email: '', phone: '', interest: '', priceRange: '', origin: ''
+      });
+    }, 3000);
   };
 
   return (
-    <div className="registration-container">
-      <h2>Cadastro de Cliente</h2>
-      
-      <form onSubmit={handleSubmit} className="client-form">
+    <div className="registration-page">
+      {/* O cartão branco centralizado */}
+      <div className="registration-card">
+        <div className="card-header">
+          <h2>Cadastro Do Cliente</h2>
+        </div>
         
-        <div className="form-group">
-          <label htmlFor="type">Tipo de Pessoa:</label>
-          <select 
-            name="type" 
-            value={formData.type} 
-            onChange={handleChange}
-          >
-            <option value="individual">Pessoa Física</option>
-            <option value="company">Pessoa Jurídica</option>
-          </select>
-        </div>
+        <form onSubmit={handleSubmit} className="client-form-figma">
+          
+          <div className="form-line">
+            <label htmlFor="fullName">Nome:</label>
+            <input
+              type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              placeholder="Maria E. Santos"
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="fullName">Nome Completo / Razão Social:</label>
-          <input
-            type="text"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            required
-            placeholder="Digite o nome"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="document">CPF / CNPJ:</label>
-          <input
-            type="text"
-            name="document"
-            value={formData.document}
-            onChange={handleChange}
-            required
-            placeholder="Apenas números"
-          />
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
+          <div className="form-line">
             <label htmlFor="email">E-mail:</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              required
-              placeholder="exemplo@email.com"
+              placeholder="mariaesantos@gmail.com"
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-line">
             <label htmlFor="phone">Telefone:</label>
             <input
               type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="(00) 00000-0000"
+              placeholder="(81) 98765-4321"
             />
           </div>
-        </div>
 
-        <div className="form-group">
-          <label htmlFor="address">Endereço:</label>
-          <input
-            type="text"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            placeholder="Rua, número, bairro"
-          />
-        </div>
+          <div className="form-line">
+            <label htmlFor="interest">Interesse:</label>
+            <input
+              type="text"
+              name="interest"
+              value={formData.interest}
+              onChange={handleChange}
+              placeholder="Comprar"
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="city">Cidade:</label>
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-          />
-        </div>
+          <div className="form-line">
+            <label htmlFor="priceRange">Faixa De Preço:</label>
+            <input
+              type="text"
+              name="priceRange"
+              value={formData.priceRange}
+              onChange={handleChange}
+              placeholder="R$ 600.000 - R$ 800.000"
+            />
+          </div>
 
-        <button type="submit" className="submit-btn">
-          Salvar Cliente
-        </button>
-      </form>
+          <div className="form-line">
+            <label htmlFor="origin">Origem:</label>
+            <input
+              type="text"
+              name="origin"
+              value={formData.origin}
+              onChange={handleChange}
+              placeholder="Whatsapp"
+            />
+          </div>
+
+          <div className="form-actions">
+            <button type="submit" className="btn-save">
+              Salvar
+            </button>
+            <button type="button" className="btn-cancel" onClick={() => console.log('Cancelar')}>
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/* Popup de Sucesso */}
+      {showSuccessPopup && (
+        <div className="success-popup">
+          <div className="popup-content">
+            <FiCheckCircle className="success-icon" />
+            <div>
+              <h4>Perfil cadastrado com sucesso!</h4>
+              <p>O seu perfil foi cadastrado corretamente.</p>
+            </div>
+            <button className="close-popup" onClick={() => setShowSuccessPopup(false)}>×</button>
+          </div>
+          <button className="btn-view-profile">Ver Perfil</button>
+        </div>
+      )}
     </div>
   );
 };
