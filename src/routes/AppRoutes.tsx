@@ -13,10 +13,10 @@ export default function AppRoutes(){
         <Routes>
             
             <Route path="/" element={<Dashboard/>}/>
-             <Route path="/" element={<Enterprise/>}/>
-              <Route path="/" element={<LeadProfile/>}/>
-               <Route path="/" element={<LeadRegistration/>}/>
-                <Route path="/" element={<PropertyRegistration/>}/>
+             <Route path="/empreendimentos" element={<Enterprise/>}/>
+              <Route path="/perfil-lead" element={<LeadProfile/>}/>
+               <Route path="/cadastro-lead" element={<LeadRegistration/>}/>
+                <Route path="/cadastro-imovel" element={<PropertyRegistration/>}/>
         </Routes>
     )
 }
