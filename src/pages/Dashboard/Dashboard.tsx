@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
 
+// --- Tipos ---
 type LeadStatus = "novo" | "visita" | "proposta";
 
 interface Lead {
@@ -21,9 +22,20 @@ interface Agendamento {
 }
 
 export default function Dashboard() {
+  // --- Estados ---
   const [leads, setLeads] = useState<Lead[]>([]);
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
+  
+  // Estado do Modal
+  const [showModal, setShowModal] = useState(false);
+  const [formLead, setFormLead] = useState({
+    nome: "",
+    local: "",
+    status: "novo" as LeadStatus,
+    mensagem: ""
+  });
 
+  // --- Carregar Dados Iniciais ---
   useEffect(() => {
     setLeads([
       { id: 1, nome: "Joana Bezerra", local: "North Palace", status: "novo", mensagem: "Oi, gostaria de saber mais sobre...", tempo: "há 15 min" },
@@ -39,6 +51,33 @@ export default function Dashboard() {
     ]);
   }, []);
 
+  // --- Funções do Modal ---
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormLead({ ...formLead, [name]: value });
+  };
+
+  const handleSaveLead = () => {
+    if (!formLead.nome || !formLead.local) return alert("Preencha o nome e o local!");
+
+    const newLead: Lead = {
+      id: Date.now(),
+      nome: formLead.nome,
+      local: formLead.local,
+      status: formLead.status,
+      mensagem: formLead.mensagem,
+      tempo: "agora mesmo"
+    };
+
+    setLeads([newLead, ...leads]);
+    setFormLead({ nome: "", local: "", status: "novo", mensagem: "" });
+    setShowModal(false);
+  };
+
+  // --- Renderização dos Cards ---
   const renderLeads = (status: LeadStatus) =>
     leads
       .filter((lead) => lead.status === status)
@@ -64,43 +103,49 @@ export default function Dashboard() {
   return (
     <div className="dashboard-page-wrapper">
       <main className="dashboard-container">
+        
+        {/* Header */}
         <header className="dashboard-header">
           <div>
             <h1>Dashboard</h1>
             <p>Seja bem-vindo(a) de volta!</p>
           </div>
-          <button className="btn-new-lead">+ Novo Lead</button>
+          <button className="btn-new-lead" onClick={handleOpenModal}>+ Novo Lead</button>
         </header>
 
+        {/* Resumo (Cards Superiores) */}
         <section className="summary-cards">
-          <div className="card"><span>Novos Leads</span><h2>15</h2></div>
-          <div className="card"><span>Visitas Agendadas</span><h2>8</h2></div>
-          <div className="card"><span>Propostas Ativas</span><h2>6</h2></div>
+          <div className="card"><span>Novos Leads</span><h2>{leads.filter(l => l.status === 'novo').length}</h2></div>
+          <div className="card"><span>Visitas Agendadas</span><h2>{leads.filter(l => l.status === 'visita').length}</h2></div>
+          <div className="card"><span>Propostas Ativas</span><h2>{leads.filter(l => l.status === 'proposta').length}</h2></div>
           <div className="card"><span>Negócios Fechados</span><h2>10</h2></div>
         </section>
 
+        {/* Grid Principal */}
         <div className="main-layout-grid">
+          
+          {/* Coluna Esquerda (Kanban + Funil) */}
           <div className="left-content-area">
             <section className="kanban-row">
               <div className="column column-blue">
                 <div className="column-title">Novos Leads</div>
                 <div className="column-body">
                   {renderLeads("novo")}
-                  <button className="add-lead-btn">+ Adicionar Lead</button>
+                  <button className="add-lead-btn" onClick={handleOpenModal}>+ Adicionar Lead</button>
                 </div>
               </div>
               <div className="column column-yellow">
                 <div className="column-title">Visitas Agendadas</div>
                 <div className="column-body">
                   {renderLeads("visita")}
-                  <button className="add-lead-btn">+ Adicionar Lead</button>
+                  <button className="add-lead-btn" onClick={handleOpenModal}>+ Adicionar Lead</button>
                 </div>
               </div>
               <div className="column column-propostas">
                 <div className="column-title">Propostas</div>
                 <div className="column-body">
                   {renderLeads("proposta")}
-                  <button className="add-lead-btn">+ Adicionar Lead</button>
+                  <button className="add-lead-btn" onClick={handleOpenModal}>+ Adicionar Lead</button>
                 </div>
               </div>
             </section>
@@ -123,6 +168,7 @@ export default function Dashboard() {
             </section>
           </div>
 
+          {/* Sidebar Direita */}
           <aside className="right-sidebar">
             <div className="sidebar-section agendamentos-box">
               <div className="sidebar-header-green">Negócios Fechados</div>
@@ -173,6 +219,53 @@ export default function Dashboard() {
           </aside>
         </div>
       </main>
+
+      {/* --- MODAL DE NOVO LEAD --- */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Novo Lead</h3>
+            
+            <label>Nome do Cliente</label>
+            <input 
+              type="text" 
+              name="nome" 
+              value={formLead.nome} 
+              onChange={handleInputChange} 
+              placeholder="Ex: Ana Souza" 
+            />
+
+            <label>Empreendimento/Local</label>
+            <input 
+              type="text" 
+              name="local" 
+              value={formLead.local} 
+              onChange={handleInputChange} 
+              placeholder="Ex: Ocean View" 
+            />
+
+            <label>Status</label>
+            <select name="status" value={formLead.status} onChange={handleInputChange}>
+              <option value="novo">Novo Lead</option>
+              <option value="visita">Visita Agendada</option>
+              <option value="proposta">Proposta</option>
+            </select>
+
+            <label>Mensagem Inicial</label>
+            <textarea 
+              name="mensagem" 
+              value={formLead.mensagem} 
+              onChange={handleInputChange} 
+              placeholder="Mensagem do cliente..."
+            ></textarea>
+
+            <div className="modal-actions">
+              <button className="btn-cancel" onClick={handleCloseModal}>Cancelar</button>
+              <button className="btn-save" onClick={handleSaveLead}>Salvar Lead</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
