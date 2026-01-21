@@ -24,6 +24,7 @@ export default function Dashboard() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
 
+  //preenchendo os estados com dados fictícios
   useEffect(() => {
     setLeads([
       { id: 1, nome: "Joana Bezerra", local: "North Palace", status: "novo", mensagem: "Oi, gostaria de saber mais sobre...", tempo: "há 15 min" },
@@ -39,6 +40,8 @@ export default function Dashboard() {
     ]);
   }, []);
 
+
+  //recebe um status e filtrar os leads pelo status
   const renderLeads = (status: LeadStatus) =>
     leads
       .filter((lead) => lead.status === status)
@@ -62,6 +65,7 @@ export default function Dashboard() {
       ));
 
   return (
+    
     <div className="dashboard-page-wrapper">
       <main className="dashboard-container">
         <header className="dashboard-header">

@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { FiCheckCircle } from "react-icons/fi";
-import { api } from "../../services/api";
-import "./ClientRegistration.css";
+/* import { api } from "../../services/api";
+ */import "./ClientRegistration.css";
 
 interface ClientFormData {
   fullName: string;
@@ -40,28 +40,36 @@ const ClientRegistration = () => {
     setLoading(true);
 
     try {
-    
-      // Requisição para cadastrar o cliente
-      await api.post("/clientes", formData);
-      setShowSuccessPopup(true);
-      setTimeout(() => {
-        setShowSuccessPopup(false);
-        setFormData({
-          fullName: "",
-          email: "",
-          phone: "",
-          interest: "",
-          priceRange: "",
-          origin: "",
-        });
-      }, 3000);
-    } catch (error) {
-      console.error(error);
-      alert("Erro ao cadastrar cliente");
-    } finally {
-  
-      setLoading(false);
-    }
+
+    // Requisição para cadastrar o cliente
+    await fetch("https://jsonplaceholder.typicode.com/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+
+  setShowSuccessPopup(true);
+
+  setTimeout(() => {
+    setShowSuccessPopup(false);
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      interest: "",
+      priceRange: "",
+      origin: "",
+    });
+  }, 3000);
+} catch (error) {
+  console.error(error);
+  alert("Erro ao cadastrar cliente");
+} finally {
+  setLoading(false);
+}
+
   };
 
   return (
