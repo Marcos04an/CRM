@@ -1,3 +1,4 @@
+import LeadRegistration from '../LeadRegistration/LeadRegistration';
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
 
@@ -23,6 +24,7 @@ interface Agendamento {
 export default function Dashboard() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     setLeads([
@@ -64,7 +66,11 @@ export default function Dashboard() {
   return (
     <div className="dashboard-page-wrapper">
       <main className="dashboard-container">
+        
         <header className="dashboard-header">
+          <button className="btn-add-lead" onClick={() => setShowModal(true)}>
+            + Adicionar Lead
+          </button>
           <div>
             <h1>Dashboard</h1>
             <p>Seja bem-vindo(a) de volta!</p>
@@ -80,13 +86,14 @@ export default function Dashboard() {
         </section>
 
         <div className="main-layout-grid">
+          
           <div className="left-content-area">
             <section className="kanban-row">
               <div className="column column-blue">
                 <div className="column-title">Novos Leads</div>
                 <div className="column-body">
                   {renderLeads("novo")}
-                  <button className="add-lead-btn">+ Adicionar Lead</button>
+                  <button className="add-lead-btn" onClick={() => setShowModal(true)}>+ Adicionar Lead</button>
                 </div>
               </div>
               <div className="column column-yellow">
@@ -104,7 +111,6 @@ export default function Dashboard() {
                 </div>
               </div>
             </section>
-
             <section className="funil-vendas-container">
               <h3>Funil de Vendas</h3>
               <div className="funil-steps">
@@ -122,7 +128,6 @@ export default function Dashboard() {
               </div>
             </section>
           </div>
-
           <aside className="right-sidebar">
             <div className="sidebar-section agendamentos-box">
               <div className="sidebar-header-green">Negócios Fechados</div>
@@ -136,7 +141,7 @@ export default function Dashboard() {
                     <tbody>
                       {agendamentos.map((item, i) => (
                         <tr key={i}>
-                          <td><small>{item.data}</small><br/>{item.hora}</td>
+                          <td><small>{item.data}</small><br />{item.hora}</td>
                           <td>{item.cliente}</td>
                           <td><span className={`badge-${item.status.toLowerCase()}`}>{item.status}</span></td>
                         </tr>
@@ -146,7 +151,6 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-
             <div className="sidebar-section historico-box">
               <div className="sidebar-padding">
                 <h4>Histórico de Interações</h4>
@@ -171,8 +175,17 @@ export default function Dashboard() {
               </div>
             </div>
           </aside>
-        </div>
+
+        </div> 
+        
+
       </main>
+
+      
+      {showModal && (
+        <LeadRegistration onClose={() => setShowModal(false)} />
+      )}
+
     </div>
   );
 }
