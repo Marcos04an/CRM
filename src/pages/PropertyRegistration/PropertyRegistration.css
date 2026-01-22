@@ -7,8 +7,8 @@
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  margin-left: 240px;             
-  margin-top: 64px;               
+  margin-left: 240px;               
+  margin-top: 64px;                  
   padding: 40px;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
@@ -22,6 +22,7 @@
   max-width: 600px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   position: relative;
+  box-sizing: border-box;
 }
 
 h2 { 
@@ -42,11 +43,11 @@ h2 {
   margin-bottom: 25px; 
 }
 
-.sessao-titulo { 
-  font-weight: bold; 
-  font-size: 16px; 
-  margin: 25px 0 15px 0; 
-  color: #333; 
+.sessao-titulo {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 30px 0 15px 0;
+  color: #333;
 }
 
 .caixa-entrada-vertical {
@@ -55,6 +56,7 @@ h2 {
   gap: 6px;
   margin-bottom: 18px;
   flex: 1;
+  min-width: 0;
 }
 
 label { 
@@ -62,7 +64,6 @@ label {
   font-size: 13px; 
   color: #444; 
 }
-
 
 input, textarea {
   background-color: #f8fafb;
@@ -72,17 +73,7 @@ input, textarea {
   font-size: 14px;
   box-sizing: border-box;
   outline: none;
-  
-}
-
-
-input.borda-erro, textarea.borda-erro {
-  border: 1px solid #ff4d4f;
-  background-color: #fff2f0;
-}
-
-.texto-erro {
-  color: #ff4d4f;
+  width: 100%;
 }
 
 textarea { 
@@ -91,95 +82,83 @@ textarea {
   font-family: inherit; 
 }
 
-.linha-dupla-campos, .linha-tripla-campos { 
-  display: flex; 
-  gap: 20px; 
+.linha-dupla-campos, .linha-tripla-campos {
+  display: flex;
+  gap: 15px;
+  width: 100%;
 }
 
-.opcoes-alinhadas { 
-  display: flex; 
-  gap: 30px; 
-  margin-bottom: 20px; 
+.opcoes-alinhadas {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
 }
 
-.opcoes-alinhadas label { 
-  display: flex; 
-  align-items: center; 
-  gap: 8px; 
+.opcoes-alinhadas label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: normal; 
-  cursor: pointer; 
+  cursor: pointer;
 }
 
-.tamanho-medio { max-width: 180px; 
-}
+.tamanho-medio { max-width: 180px; }
 
-.tamanho-mini { max-width: 90px; 
-}
-
-.botoes-final { 
-  display: flex; 
-  justify-content: flex-end; 
-  gap: 15px; 
-  margin-top: 30px; 
-}
-
-.botao-cinza-limpar { 
-  background: #eee; 
-  border: none; 
-  padding: 12px 35px; 
-  border-radius: 8px; 
-  cursor: pointer; 
-  font-weight: bold; 
-  color: #555; 
-}
-
-.botao-verde-confirmar { 
-  background: #4ecb8d; 
-  color: white; 
-  border: none; 
-  padding: 12px 35px; 
-  border-radius: 8px; 
-  cursor: pointer; 
-  font-weight: bold; 
-}
-
-.botao-verde-confirmar:hover { 
-  background: #3eb87d; 
-}
-
+input.borda-erro { border: 1px solid #ff4d4f; background-color: #fff2f0; }
+.texto-erro { color: #ff4d4f; }
 
 .notificacao-sucesso {
-  position: fixed; 
-  bottom: 30px; 
-  right: 30px; 
-  background: white; 
-  padding: 20px; 
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: white;
+  padding: 30px 20px 20px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
-  width: 280px; 
-  text-align: center; 
-  z-index: 1100; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 280px;
+  text-align: center;
+  z-index: 1100;
+  border: 1px solid #eee;
 }
 
-.icone-check { 
-  background: #4ecb8d; 
-  color: white; 
-  width: 35px; 
-  height: 35px; 
-  border-radius: 50%; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  margin: 0 auto 10px; 
+.icone-check {
+  background: #4ecb8d;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
 }
 
-.x-fechar { 
-  position: absolute; 
-  top: 10px; 
-  right: 12px; 
-  border: none; 
-  background: none; 
-  font-size: 20px; 
-  color: #ccc; 
-  cursor: pointer; 
+.x-fechar-notif { position: absolute; top: 10px; right: 12px; border: none; background: none; font-size: 22px; color: #ccc; cursor: pointer; }
+.x-fechar-topo { position: absolute; top: 20px; right: 20px; border: none; background: none; font-size: 24px; color: #ccc; cursor: pointer; }
+
+.botoes-final {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.botao-cinza-limpar {
+  background: #eee;
+  border: none;
+  padding: 12px 35px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+}
+
+.botao-verde-confirmar {
+  background: #4ecb8d;
+  color: white;
+  border: none;
+  padding: 12px 35px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
 }
