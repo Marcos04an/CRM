@@ -1,69 +1,96 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
-// Importando um ícone de "check" para o popup (pode precisar instalar: npm i react-icons)
-import { FiCheckCircle } from 'react-icons/fi'; 
-import './ClientRegistration.css';
+import { useState, type ChangeEvent, type FormEvent } from "react";
+import { FiCheckCircle } from "react-icons/fi";
+import "./ClientRegistration.css";
 
-// Interface atualizada com os campos do Figma
 interface ClientFormData {
   fullName: string;
   email: string;
   phone: string;
-  interest: string; // Novo campo
-  priceRange: string; // Novo campo
-  origin: string; // Novo campo
+  interest: string;
+  priceRange: string;
+  origin: string;
 }
 
 const ClientRegistration = () => {
   const [formData, setFormData] = useState<ClientFormData>({
-    fullName: '',
-    email: '',
-    phone: '',
-    interest: '',
-    priceRange: '',
-    origin: ''
+    fullName: "",
+    email: "",
+    phone: "",
+    interest: "",
+    priceRange: "",
+    origin: "",
   });
 
-  // Estado para controlar a exibição do popup de sucesso
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState("");
+  const [toastType, setToastType] = useState<"success" | "warning">("success");
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target as HTMLInputElement;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  const showToast = (msg: string, type: "success" | "warning" = "success") => {
+    setToastType(type);
+    setToast(msg);
+    setTimeout(() => setToast(""), 3000);
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    console.log('Dados para envio:', formData);
-    
-    // Mostra o popup de sucesso
-    setShowSuccessPopup(true);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    // Esconde o popup e limpa o formulário após 3 segundos
-    setTimeout(() => {
-      setShowSuccessPopup(false);
-      setFormData({
-        fullName: '', email: '', phone: '', interest: '', priceRange: '', origin: ''
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if (
+      !formData.fullName ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.interest
+    ) {
+      showToast("Preencha os campos obrigatórios.", "warning");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      await fetch("https://jsonplaceholder.typicode.com/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-    }, 3000);
+
+      localStorage.setItem("ultimoLead", JSON.stringify(formData));
+
+      showToast(
+        "Cliente cadastrado! Agora clique em Adicionar Lead no Dashboard.",
+        "success"
+      );
+
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        interest: "",
+        priceRange: "",
+        origin: "",
+      });
+    } catch (error) {
+      showToast("Erro ao cadastrar cliente.", "warning");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="registration-page">
-      {/* O cartão branco centralizado */}
       <div className="registration-card">
         <div className="card-header">
           <h2>Cadastro Do Cliente</h2>
         </div>
-        
+
         <form onSubmit={handleSubmit} className="client-form-figma">
-          
           <div className="form-line">
-            <label htmlFor="fullName">Nome:</label>
+            <label>Nome:</label>
             <input
-              type="text"
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
@@ -72,7 +99,7 @@ const ClientRegistration = () => {
           </div>
 
           <div className="form-line">
-            <label htmlFor="email">E-mail:</label>
+            <label>E-mail:</label>
             <input
               type="email"
               name="email"
@@ -83,9 +110,8 @@ const ClientRegistration = () => {
           </div>
 
           <div className="form-line">
-            <label htmlFor="phone">Telefone:</label>
+            <label>Telefone:</label>
             <input
-              type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
@@ -94,9 +120,8 @@ const ClientRegistration = () => {
           </div>
 
           <div className="form-line">
-            <label htmlFor="interest">Interesse:</label>
+            <label>Interesse:</label>
             <input
-              type="text"
               name="interest"
               value={formData.interest}
               onChange={handleChange}
@@ -105,9 +130,8 @@ const ClientRegistration = () => {
           </div>
 
           <div className="form-line">
-            <label htmlFor="priceRange">Faixa De Preço:</label>
+            <label>Faixa De Preço:</label>
             <input
-              type="text"
               name="priceRange"
               value={formData.priceRange}
               onChange={handleChange}
@@ -116,9 +140,8 @@ const ClientRegistration = () => {
           </div>
 
           <div className="form-line">
-            <label htmlFor="origin">Origem:</label>
+            <label>Origem:</label>
             <input
-              type="text"
               name="origin"
               value={formData.origin}
               onChange={handleChange}
@@ -127,28 +150,31 @@ const ClientRegistration = () => {
           </div>
 
           <div className="form-actions">
-            <button type="submit" className="btn-save">
-              Salvar
+            <button type="submit" className="btn-save" disabled={loading}>
+              {loading ? "Salvando..." : "Salvar"}
             </button>
-            <button type="button" className="btn-cancel" onClick={() => console.log('Cancelar')}>
+
+            <button
+              type="button"
+              className="btn-cancel"
+              onClick={() => window.history.back()}
+            >
               Cancelar
             </button>
           </div>
         </form>
       </div>
 
-      {/* Popup de Sucesso */}
-      {showSuccessPopup && (
-        <div className="success-popup">
-          <div className="popup-content">
-            <FiCheckCircle className="success-icon" />
-            <div>
-              <h4>Perfil cadastrado com sucesso!</h4>
-              <p>O seu perfil foi cadastrado corretamente.</p>
-            </div>
-            <button className="close-popup" onClick={() => setShowSuccessPopup(false)}>×</button>
+      {toast && (
+        <div
+          className={toastType === "success" ? "toast-success" : "toast-warning"}
+        >
+          <div className="toast-row">
+            {toastType === "success" && (
+              <FiCheckCircle className="toast-icon" />
+            )}
+            <span>{toast}</span>
           </div>
-          <button className="btn-view-profile">Ver Perfil</button>
         </div>
       )}
     </div>

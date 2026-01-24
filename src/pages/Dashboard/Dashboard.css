@@ -8,8 +8,6 @@
   font-family: 'Poppins', sans-serif;
 }
 
-
-
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -25,6 +23,13 @@
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-new-lead:hover {
+  background: #2fb97a;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(67, 198, 139, 0.25);
 }
 
 .summary-cards {
@@ -44,7 +49,6 @@
 .card span { font-size: 13px; color: #888; }
 .card h2 { font-size: 24px; margin-top: 5px; }
 
-
 .main-layout-grid {
   display: grid;
   grid-template-columns: 1fr 340px;
@@ -57,7 +61,6 @@
   flex-direction: column;
   gap: 20px;
 }
-
 
 .kanban-row {
   display: grid;
@@ -84,11 +87,9 @@
 .column-yellow .column-title { background: #ffbe0b; }
 .column-propostas .column-title { background: #4ecdc4; }
 
-
 .column-body { 
   padding: 10px; 
 }
-
 
 .lead-card {
   background: white;
@@ -97,14 +98,39 @@
   padding: 12px;
   margin-bottom: 12px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.lead-header { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
-.avatar-circle { width: 32px; height: 32px; background: #ddd; border-radius: 50%; }
+.lead-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+}
+
+.lead-header { 
+  display: flex; 
+  gap: 10px; 
+  align-items: center; 
+  margin-bottom: 8px; 
+}
+
+.avatar-circle { 
+  width: 32px; 
+  height: 32px; 
+  background: #ddd; 
+  border-radius: 50%; 
+}
+
 .lead-info strong { font-size: 13px; display: block; }
 .lead-info span { font-size: 11px; color: #999; }
-.lead-location { font-size: 12px; font-weight: 600; margin: 5px 0; }
-.lead-msg, .lead-project { 
+
+.lead-location { 
+  font-size: 12px; 
+  font-weight: 600; 
+  margin: 5px 0; 
+}
+
+.lead-msg, 
+.lead-project { 
   background: #f9f9f9; 
   padding: 8px; 
   border-radius: 6px; 
@@ -121,7 +147,10 @@
   margin-top: 10px;
 }
 
-.ia-badge { color: #43c68b; font-weight: 600; }
+.ia-badge { 
+  color: #43c68b; 
+  font-weight: 600; 
+}
 
 .add-lead-btn {
   width: 100%;
@@ -131,8 +160,20 @@
   border-radius: 8px;
   cursor: pointer;
   color: #777;
+  transition: all 0.2s ease;
 }
 
+.add-lead-btn.highlight {
+  border: 2px dashed #43c68b;
+  color: #43c68b;
+  font-weight: 600;
+}
+
+.add-lead-btn.highlight:hover {
+  background: #e9f8f2;
+  border-color: #2fb97a;
+  color: #2fb97a;
+}
 
 .funil-vendas-container {
   background: white;
@@ -156,9 +197,20 @@
   text-align: center;
   background: #fff;
   clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%, 10% 50%);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.funil-step.active { border-color: #3a86ff; color: #3a86ff; }
+.funil-step.active { 
+  border-color: #3a86ff; 
+  color: #3a86ff; 
+}
+
+.funil-step:hover {
+  background: #f1f7ff;
+  border-color: #3a86ff;
+  color: #3a86ff;
+}
 
 .funil-cards-row {
   display: flex;
@@ -176,8 +228,13 @@
 
 .funil-item strong { font-size: 12px; }
 .funil-item p { font-size: 11px; color: #666; margin-top: 4px; }
-.price-tag { background: #d1f7e6; color: #157347; padding: 2px 4px; border-radius: 4px; }
 
+.price-tag { 
+  background: #d1f7e6; 
+  color: #157347; 
+  padding: 2px 4px; 
+  border-radius: 4px; 
+}
 
 .right-sidebar {
   display: flex;
@@ -204,24 +261,83 @@
 .sidebar-padding { 
   padding: 15px;
   padding-bottom: 0;
- }
+}
 
-.agendamentos-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-.agendamentos-table th { text-align: left; color: #aaa; padding-bottom: 10px; font-weight: 400; }
-.agendamentos-table td { padding: 10px 0; border-top: 1px solid #f5f5f5; }
+.agendamentos-table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  font-size: 12px; 
+}
 
-.badge-agendado { background: #e8f5ed; color: #2ecc71; padding: 4px 8px; border-radius: 6px; font-size: 10px; }
-.badge-pendente { background: #fff9e6; color: #f1c40f; padding: 4px 8px; border-radius: 6px; font-size: 10px; }
+.agendamentos-table th { 
+  text-align: left; 
+  color: #aaa; 
+  padding-bottom: 10px; 
+  font-weight: 400; 
+}
 
+.agendamentos-table td { 
+  padding: 10px 0; 
+  border-top: 1px solid #f5f5f5; 
+}
 
-.user-profile-mini { display: flex; gap: 10px; align-items: center; margin-bottom: 15px; }
+.badge-agendado { 
+  background: #e8f5ed; 
+  color: #2ecc71; 
+  padding: 4px 8px; 
+  border-radius: 6px; 
+  font-size: 10px; 
+}
+
+.badge-pendente { 
+  background: #fff9e6; 
+  color: #f1c40f; 
+  padding: 4px 8px; 
+  border-radius: 6px; 
+  font-size: 10px; 
+}
+
+.user-profile-mini { 
+  display: flex; 
+  gap: 10px; 
+  align-items: center; 
+  margin-bottom: 15px; 
+}
+
 .user-profile-mini strong { font-size: 13px; }
 .user-profile-mini p { font-size: 11px; color: #888; }
 
-.interaction-timeline { border-left: 2px solid #eee; padding-left: 15px; margin-bottom: 20px; }
-.timeline-item { margin-bottom: 15px; position: relative; }
-.timeline-item span { font-weight: 600; font-size: 11px; }
-.timeline-item p { font-size: 11px; color: #666; margin-top: 3px; }
+.interaction-timeline { 
+  border-left: 2px solid #eee; 
+  padding-left: 15px; 
+  margin-bottom: 20px; 
+}
+
+.timeline-item { 
+  margin-bottom: 15px; 
+  position: relative; 
+}
+
+.timeline-item span { 
+  font-weight: 600; 
+  font-size: 11px; 
+}
+
+.timeline-item p { 
+  font-size: 11px; 
+  color: #666; 
+  margin-top: 3px; 
+}
+
+.ai-tag {
+  background: #e6f4ff;
+  color: #3a86ff;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-left: 8px;
+  font-weight: 600;
+}
 
 .btn-assumir {
   width: 100%;
@@ -233,9 +349,27 @@
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 20px;
-  
+  transition: all 0.2s ease;
 }
 
+.btn-assumir:hover {
+  background: #2fb97a;
+  box-shadow: 0 5px 12px rgba(67, 198, 139, 0.25);
+}
+.lead-added-popup {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  z-index: 9999;
+  color: #333;
+}
 
-
- 
+.lead-added-popup strong {
+  color: #43c68b;
+}
