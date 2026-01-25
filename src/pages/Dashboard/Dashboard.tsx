@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
+import { Link } from "react-router-dom";
 
 type LeadStatus = "novo" | "visita" | "proposta";
 
@@ -73,7 +74,10 @@ export default function Dashboard() {
             <h1>Dashboard</h1>
             <p>Seja bem-vindo(a) de volta!</p>
           </div>
-          <button className="btn-new-lead">+ Novo Lead</button>
+          <Link to="/cadastro-cliente">
+            <button className="btn-new-lead">+ Novo Lead</button>
+          </Link>
+          
         </header>
 
         <section className="summary-cards">
