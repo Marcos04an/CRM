@@ -1,8 +1,6 @@
-
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { FiCheckCircle } from "react-icons/fi";
-
- import "./ClientRegistration.css";
+import "./ClientRegistration.css";
 
 interface ClientFormData {
   fullName: string;
@@ -60,6 +58,7 @@ const ClientRegistration = () => {
         body: JSON.stringify(formData),
       });
 
+    
       localStorage.setItem("ultimoLead", JSON.stringify(formData));
 
       showToast(

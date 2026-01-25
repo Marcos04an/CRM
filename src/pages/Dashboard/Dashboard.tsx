@@ -73,7 +73,7 @@ export default function Dashboard() {
 
   const showToastMsg = (msg: string) => {
     setToast(msg);
-    setTimeout(() => setToast(""), 3000);
+    window.setTimeout(() => setToast(""), 3000);
   };
 
   const handleNovoLead = () => {
@@ -112,7 +112,7 @@ export default function Dashboard() {
 
     setAddedLeadName(lead.fullName);
     setShowAddPopup(true);
-    setTimeout(() => setShowAddPopup(false), 2500);
+    window.setTimeout(() => setShowAddPopup(false), 2500);
   };
 
   const renderLeads = (status: LeadStatus) =>
@@ -214,11 +214,10 @@ export default function Dashboard() {
 
             <section className="funil-vendas-container">
               <h3>Funil de Vendas</h3>
+
               <div className="funil-steps">
                 <div
-                  className={`funil-step ${
-                    funilAtivo === "Leads" ? "active" : ""
-                  }`}
+                  className={`funil-step ${funilAtivo === "Leads" ? "active" : ""}`}
                   onClick={() => setFunilAtivo("Leads")}
                 >
                   Leads
@@ -248,9 +247,7 @@ export default function Dashboard() {
                   Propostas
                 </div>
                 <div
-                  className={`funil-step ${
-                    funilAtivo === "Fechados" ? "active" : ""
-                  }`}
+                  className={`funil-step ${funilAtivo === "Fechados" ? "active" : ""}`}
                   onClick={() => setFunilAtivo("Fechados")}
                 >
                   Fechados
@@ -304,9 +301,7 @@ export default function Dashboard() {
                           </td>
                           <td>{item.cliente}</td>
                           <td>
-                            <span
-                              className={`badge-${item.status.toLowerCase()}`}
-                            >
+                            <span className={`badge-${item.status.toLowerCase()}`}>
                               {item.status}
                             </span>
                           </td>
@@ -320,7 +315,9 @@ export default function Dashboard() {
 
             <div className="sidebar-section historico-box">
               <div className="sidebar-padding">
-                <h4>Histórico de Interações <span className="ai-tag">🤖 IA</span></h4>
+                <h4>
+                  Histórico de Interações <span className="ai-tag">🤖 IA</span>
+                </h4>
 
                 <div className="user-profile-mini">
                   <div className="avatar-circle"></div>
