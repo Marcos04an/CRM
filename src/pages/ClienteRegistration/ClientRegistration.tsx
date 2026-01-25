@@ -1,6 +1,8 @@
+
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { FiCheckCircle } from "react-icons/fi";
-import "./ClientRegistration.css";
+
+ import "./ClientRegistration.css";
 
 interface ClientFormData {
   fullName: string;
@@ -28,7 +30,7 @@ const ClientRegistration = () => {
   const showToast = (msg: string, type: "success" | "warning" = "success") => {
     setToastType(type);
     setToast(msg);
-    setTimeout(() => setToast(""), 3000);
+    window.setTimeout(() => setToast(""), 3000);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,10 +43,10 @@ const ClientRegistration = () => {
     setLoading(true);
 
     if (
-      !formData.fullName ||
-      !formData.email ||
-      !formData.phone ||
-      !formData.interest
+      !formData.fullName.trim() ||
+      !formData.email.trim() ||
+      !formData.phone.trim() ||
+      !formData.interest.trim()
     ) {
       showToast("Preencha os campos obrigatórios.", "warning");
       setLoading(false);
@@ -74,6 +76,7 @@ const ClientRegistration = () => {
         origin: "",
       });
     } catch (error) {
+      console.error(error);
       showToast("Erro ao cadastrar cliente.", "warning");
     } finally {
       setLoading(false);
@@ -166,13 +169,9 @@ const ClientRegistration = () => {
       </div>
 
       {toast && (
-        <div
-          className={toastType === "success" ? "toast-success" : "toast-warning"}
-        >
+        <div className={toastType === "success" ? "toast-success" : "toast-warning"}>
           <div className="toast-row">
-            {toastType === "success" && (
-              <FiCheckCircle className="toast-icon" />
-            )}
+            {toastType === "success" && <FiCheckCircle className="toast-icon" />}
             <span>{toast}</span>
           </div>
         </div>

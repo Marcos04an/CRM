@@ -1,3 +1,4 @@
+
 .registration-page {
   display: flex;
   justify-content: center;
@@ -22,6 +23,7 @@
   font-size: 1.8rem;
   font-weight: 800;
   margin-bottom: 3rem;
+  text-align: left;
 }
 
 .client-form-figma {
@@ -39,7 +41,9 @@
 
 .form-line label {
   width: 130px;
+  color: #000;
   font-weight: 700;
+  font-size: 1rem;
 }
 
 .form-line input {
@@ -47,7 +51,14 @@
   border: none;
   outline: none;
   font-size: 1rem;
+  color: #555;
   padding: 0.5rem 0;
+  background: transparent;
+}
+
+.form-line input::placeholder {
+  color: #999;
+  font-weight: 400;
 }
 
 .form-actions {
@@ -62,9 +73,11 @@
   padding: 0.8rem 3.5rem;
   border-radius: 30px;
   font-weight: 600;
-  border: none;
   cursor: pointer;
-  color: #fff;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  transition: opacity 0.2s;
 }
 
 .btn-save {
@@ -73,6 +86,11 @@
 
 .btn-cancel {
   background: #66bb6a;
+}
+
+.btn-save:hover,
+.btn-cancel:hover {
+  opacity: 0.9;
 }
 
 .toast-success,
@@ -87,6 +105,8 @@
   font-weight: 600;
   display: flex;
   align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
 .toast-success {
