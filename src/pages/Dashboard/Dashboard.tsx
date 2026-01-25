@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 
+
 type LeadStatus = "novo" | "visita" | "proposta";
 
 interface Lead {
@@ -106,9 +107,12 @@ export default function Dashboard() {
             <h1>Dashboard</h1>
             <p>Seja bem-vindo(a) de volta!</p>
           </div>
+
           <button className="btn-new-lead" onClick={() => navigate("./cadastro-cliente")}>
             + Novo Lead
           </button>
+
+          
         </header>
         
 
