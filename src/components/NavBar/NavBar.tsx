@@ -27,7 +27,7 @@ export default function NavBar() {
     { name: "Unidades", icon: "🏠", path: "/unidades" },
     { name: "Atendimentos", icon: "🎧", path: "/atendimentos" },
     // Aqui está o caminho que criamos no AppRoutes.tsx:
-    { name: "Cadastro-Cliente", icon: "📝", path: "/cadastro-cliente" }, 
+    /* { name: "Cadastro-Cliente", icon: "📝", path: "/cadastro-cliente" },  */
     { name: "Configurações", icon: "⚙️", path: "/configuracoes" },
   ];
 
@@ -42,6 +42,7 @@ export default function NavBar() {
     <aside className="navbar">
       <div className="navbar-header">
         <div className="navbar-title">
+          <span className="navbar-logo-icon">📁</span>
           <span className="anylai-texto">
             CRM AnyL<span className="ai-green">AI</span>
           </span>
