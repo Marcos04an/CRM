@@ -16,10 +16,8 @@ body,
   margin-top: 64px;        
   margin-left: 240px;     
   width: calc(100% - 240px);
-
   padding: 24px;
   height: calc(100vh - 64px); 
-
   overflow-y: auto;       
   background-color: #f9f9f9;
 }

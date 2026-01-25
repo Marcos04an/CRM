@@ -1,53 +1,56 @@
-/* Fundo BRANCO da página (igual ao Figma) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+
 .registration-page {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 60px);
-  background-color: #FFFFFF; /* Fundo branco puro */
+  background-color: #FFFFFF; 
   padding: 2rem;
   position: relative;
+  font-family: "Poppins", sans-serif;
 }
 
-/* O cartão central */
+/*  card central */
 .registration-card {
   background-color: #FFFFFF;
-  padding: 2rem 4rem; /* Mais espaçamento lateral */
+  padding: 2rem 4rem; 
   width: 100%;
   max-width: 800px;
-  /* Sombra muito suave apenas para destacar levemente o card */
+  
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.05); 
   border-radius: 16px;
 }
 
-/* Título "Cadastro Do Cliente" */
+
 .card-header h2 {
   color: #000;
   font-size: 1.8rem;
-  font-weight: 800; /* Negrito forte */
+  font-weight: 800; 
   margin-bottom: 3rem;
   text-align: left;
 }
 
-/* Container do formulário */
+
 .client-form-figma {
   display: flex;
   flex-direction: column;
-  gap: 2rem; /* Espaço maior entre os campos */
+  gap: 2rem; 
 }
 
-/* Estilo de cada linha (Label + Input) */
+
 .form-line {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #D3D3D3; /* Linha cinza clara */
+  border-bottom: 1px solid #D3D3D3;
   padding-bottom: 0.5rem;
 }
 
 .form-line label {
   width: 130px;
-  color: #000; /* Preto forte */
-  font-weight: 700; /* Negrito */
+  color: #000; 
+  font-weight: 700; 
   font-size: 1rem;
 }
 
@@ -56,47 +59,47 @@
   border: none;
   outline: none;
   font-size: 1rem;
-  color: #555; /* Cor do texto digitado (cinza escuro) */
+  color: #555; 
   padding: 0.5rem 0;
   background: transparent;
 }
 
-/* Placeholder (texto de exemplo) */
+
 .form-line input::placeholder {
   color: #999;
   font-weight: 400;
 }
 
-/* Área dos Botões */
+
 .form-actions {
   display: flex;
   gap: 1.5rem;
   margin-top: 3rem;
-  justify-content: flex-end; /* Alinha os botões à direita */
+  justify-content: flex-end; 
 }
 
-/* Botão Salvar */
+
 .btn-save {
   padding: 0.8rem 3.5rem;
-  border-radius: 30px; /* Bem arredondado */
+  border-radius: 30px; 
   font-weight: 600;
   cursor: pointer;
   border: none;
-  background-color: #4CAF50; /* Verde padrão */
+  background-color:  #4ecb8d; 
   color: white;
   font-size: 1rem;
   transition: opacity 0.2s;
 }
 
-/* Botão Cancelar */
+
 .btn-cancel {
   padding: 0.8rem 3.5rem;
-  border-radius: 30px; /* Bem arredondado */
+  border-radius: 30px; 
   font-weight: 600;
   cursor: pointer;
   border: none;
-  background-color: #66BB6A; /* Um verde um pouco mais claro, conforme a imagem */
-  color: white;
+  background: #eee; 
+  color:  #555;
   font-size: 1rem;
   transition: opacity 0.2s;
 }
@@ -105,7 +108,7 @@
   opacity: 0.9;
 }
 
-/* --- Popup de Sucesso (Estilo Clean) --- */
+/* popup de sucesso */
 .success-popup {
   position: absolute;
   bottom: 40px;
