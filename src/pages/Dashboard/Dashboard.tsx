@@ -46,14 +46,55 @@ export default function Dashboard() {
   const etapasFunil = ["Leads", "Contato Feito", "Visitas Agendadas", "Propostas", "Fechados"];
 
 
+
+//vai carregar os leads do localstorage
+useEffect(() => {
+    const leadsSalvos = localStorage.getItem("leads");
+
+    if (leadsSalvos) {
+      setLeads(JSON.parse(leadsSalvos));
+    } else {
+      const iniciais: Lead[] = [
+        {
+          id: 1,
+          nome: "Joana Bezerra",
+          local: "North Palace",
+          status: "novo",
+          tempo: "há 15 min",
+        },
+        {
+          id: 2,
+          nome: "Alan Braga",
+          local: "Acaú",
+          status: "visita",
+          tempo: "há 2 horas",
+        },
+        {
+          id: 3,
+          nome: "Eduardo Silva",
+          local: "Beach Lotus",
+          status: "proposta",
+          tempo: "há 45 min",
+        },
+      ];
+
+      setLeads(iniciais);
+      localStorage.setItem("leads", JSON.stringify(iniciais));
+    }
+  }, []);
+
+
+  //vai salvar automaticamente 
+  useEffect(() => {
+  if (leads.length > 0) {
+    localStorage.setItem("leads", JSON.stringify(leads));
+  }
+}, [leads]);
+
+  
   //preenchemos os estados com dados fictícios
   useEffect(() => {
-    setLeads([
-      { id: 1, nome: "Joana Bezerra", local: "North Palace", status: "novo", mensagem: "Oi, gostaria de saber mais sobre...", tempo: "há 15 min" },
-      { id: 2, nome: "Alan Braga", local: "Acaú", status: "visita", projeto: "Apartamento 2 quartos", tempo: "há 2 horas" },
-      { id: 3, nome: "Eduardo Silva", local: "Beach Lotus", status: "proposta", mensagem: "Oi, gostaria de saber mais...", tempo: "há 45 min" },
-    ]);
-
+    
     setAgendamentos([
       { data: "Hoje", hora: "09:00", cliente: "Luisa Santos", status: "Agendado" },
       { data: "Hoje", hora: "14:00", cliente: "Carlos Silva", status: "Agendado" },
